@@ -31,8 +31,8 @@ Integrated a persistent data layer to track your performance over time.
 
 ## Real-time Statistics
 The game automatically calculates your performance metrics using the following logic:
-Total Games: Wins + Losses
-Win Percentage: (wins / total) * 100
+- Total Games: Wins + Losses
+- Win Percentage: (wins / total) * 100
 
 ## How to Play
 
