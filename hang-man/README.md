@@ -2,19 +2,26 @@
 A retro-style Hangman game built with React and Vite, now featuring persistent player accounts and win/loss tracking powered by Amazon DynamoDB.
 
 ## Local Development
-If you want to run the game and UI on your machine without Docker:Bash# Install dependencies
+If you want to run the game and UI on your machine without Docker
+
+# Install dependencies
+```bash
 npm install
+```
 
 ## Start the dev server
-# npm run dev
+```bash
+npm run dev
+```
 Then open http://localhost:5173 in your browser.
 
 ## Docker Compose 
 The project is now fully containerized using Docker Compose. This spins up both the React frontend and a local DynamoDB instance to store your stats.
 
 ## Launch the stack:
-
-# docker-compose up -d
+```bash
+docker-compose up -d
+```
 
 Access the game:
 Frontend: http://localhost:8080Local 
