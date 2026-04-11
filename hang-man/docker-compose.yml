@@ -1,0 +1,30 @@
+version: '3.8'
+
+services:
+  # DynamoDB Service
+  dynamodb-local:
+    image: amazon/dynamodb-local:latest
+    container_name: dynamodb-local
+    ports:
+      - "8000:8000"
+    
+    command: "-jar DynamoDBLocal.jar -sharedDb -cors *"
+    volumes:
+      - ./docker/dynamodb:/home/dynamodblocal/data
+    working_dir: /home/dynamodblocal
+
+  # React App Service
+  hangman-app:
+    build: .
+    container_name: hangman-react-app
+    ports:
+      - "5173:5173"
+    environment:
+      - VITE_DYNAMODB_ENDPOINT=http://localhost:8000
+    
+    command: npm run dev -- --host 0.0.0.0
+    volumes:
+      - .:/app
+      - /app/node_modules
+    depends_on:
+      - dynamodb-local

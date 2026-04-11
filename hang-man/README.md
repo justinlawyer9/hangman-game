@@ -1,38 +1,57 @@
-## Hangman
-A retro-style Hangman game built with React and Vite. A dynamic "Secret Word" display with structural dashes, and a color-coded keyboard.
+## Hangman v2 
+A retro-style Hangman game built with React and Vite, now featuring persistent player accounts and win/loss tracking powered by Amazon DynamoDB.
 
-## Quick Start
-1. Local Development
-If you want to run the game on your machine without Docker:
-
-
-# Install dependencies
+## Local Development
+If you want to run the game and UI on your machine without Docker:Bash# Install dependencies
 npm install
 
-# Start the dev server
-npm run dev
+## Start the dev server
+# npm run dev
 Then open http://localhost:5173 in your browser.
 
-## Docker (Containerized)
-Since we just fixed your Dockerfile, you can run the game in a clean, isolated container:
+## Docker Compose 
+The project is now fully containerized using Docker Compose. This spins up both the React frontend and a local DynamoDB instance to store your stats.
 
-1. Build the image:
+## Launch the stack:
 
-docker build -t hang-man .
+# docker-compose up -d
 
-Run the container: 
+Access the game:
+Frontend: http://localhost:8080Local 
+DynamoDB Admin: http://localhost:8000 (if configured)
 
-docker run -d -p 8080:80 --name hangman-app hang-man
-Then open http://localhost:8080 to play!
+## Account & Stats System
+Integrated a persistent data layer to track your performance over time.
+
+## Persistent Player Accounts
+
+- Account Creation: Enter a unique username to start tracking your stats.
+
+- Database: Powered by DynamoDB, ensuring your stats survive a refresh or container restart.
+
+## Real-time Statistics
+The game automatically calculates your performance metrics using the following logic:
+Total Games: Wins + Losses
+Win Percentage: (wins / total) * 100
 
 ## How to Play
+
 The Goal: Guess the secret word one letter at a time before you run out of lives.
 
-Lives: You start with 5 lives. Each wrong guess costs a life and evolves the Hangman sprite.
+Lives: You start with 5 lives. Each wrong guess evolves the Hangman sprite.
 
-Visuals: Fill in spot in secret word: Correct guess.
+Visuals:Correct Guess: Fills the structural dashes in the secret word.
 
-Greyed out and not filled in: Incorrect guess.
+Incorrect Guess: Keyboards keys are greyed out and a life is lost.
 
-Reset: Click the "Play Again" via the game-over pop-up to get a new random word.
+Stats: Your win/loss record and percentage are updated automatically in the database after every game.
 
+Reset: Use the "Play Again" button in the game-over pop-up to fetch a new random word and keep your streak alive.
+
+## Tech Stack
+
+- Frontend: React + Vite
+
+- Backend/Database: Amazon DynamoDB 
+
+- Orchestration: Docker Compose 
